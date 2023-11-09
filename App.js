@@ -1,6 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList, ScrollView } from 'react-native';
-import { Icon } from '@rneui/themed';
+import { StyleSheet, Text, View, FlatList, ScrollView } from 'react-native';
+import { Button } from '@rneui/themed';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { datas } from './data';
 
@@ -18,25 +17,15 @@ export default function App() {
         data={datas}
         keyExtractor={(index) => index.toString()}
         renderItem={({ item }) => (
-        <View style={styles.user}>
-          <Image
-            style={styles.image}
-            resizeMode="cover"
-            source={{ uri: item.avatar }}
-          />
-        <View>
-          <Text style={styles.name}>{item.name}</Text>
-          <Text style={styles.address}>{item.address}</Text>
-        </View>
-        <View style={{flex:1}}>
-        <TouchableOpacity onPress={()=>fullName(`${item.name}${'\n'}${item.alias}${'\n'}${item.position}${'\n'}${item.address}${'\n'}${item.bounty}`)}>
-          <Icon
-            name="dots-three-horizontal"
-            type="entypo"
-            size={20}
-            style={styles.opt}
-        />
-        </TouchableOpacity>
+        <View style={styles.user}>          
+          <View style={styles.nickn}>
+            <Text style={styles.name}>{item.nickName}</Text>
+          </View>
+        <View style={styles.button}>
+        <Button 
+              title="Show"
+              onPress={()=>fullName(`${'Name: '}${item.name.firstName}${' '}${item.name.lastName}${'\n'}${'Course: '}${item.course}${'\n'}${'Year: '}${item.year}`)}
+              buttonStylestyle={styles.buton}/>
         </View> 
     </View>
   )}
@@ -49,34 +38,31 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
     marginTop: 20,
     padding: 20,
   },
   user: {
     flexDirection: 'row',
     marginBottom: 6,
-  },
-  image: {
-    width: 50,
-    height: 50,
-    marginRight: 20,
-    borderRadius:400/2,
+    width: 300,
   },
   name: {
-    fontSize: 16,
+    fontSize: 30,
     marginTop: 5,
     fontWeight:'bold',
   },
-  address:{
-    fontSize: 12,
-    marginBottom:20
+  nickn: {
+    width: 200,
+    padding: 10,
   },
-  opt:{
-    flexDirection:'row-reverse',
-    padding:12,
-    marginLeft:15
+  buton: {
+    width: 59,
+    color: 'green',
+  },
+  button: {
+    width: 89,
+    marginTop: 10,
+    flexDirection: 'row-reverse',
   },
 });
